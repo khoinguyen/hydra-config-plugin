@@ -1,3 +1,4 @@
+'use strict';
 
 const Promise = require('bluebird');
 const HydraPlugin = require('hydra/plugin');
@@ -10,7 +11,7 @@ class Reconfigurable extends HydraPlugin {
 
   setConfig(hydraConfig) {
     super.setConfig(hydraConfig);
-
+    
     if (!process.env.HYDRA_SERVICE || !process.env.HYDRA_REDIS_URL) {
       this.hydra.sendToHealthLog('info', `[reconfigurable] No HYDRA_SERVICE or HYDRA_REDIS_URL env configured. No config changes listen configured.`);
       return;
@@ -23,10 +24,11 @@ class Reconfigurable extends HydraPlugin {
   registerReconfigureListener() {
     this.hydra.on('message', (message) => {
       if (message.typ === RECONFIGURE_EVENT) {
-        if (process.env.HYDRA_SERVICE === message.bdy.label) {
-          hydra.getConfig(label).then((newConfig) => {
+        const label =message.bdy.label;
+        if (process.env.HYDRA_SERVICE === label) {
+          this.hydra.getConfig(label).then((newConfig) => {
             this.hydra.sendToHealthLog('debug', `[reconfigurable] Config changes detected. Emit '${RECONFIGURE_EVENT}' event.`);
-            hydra.emit(RECONFIGURE_EVENT, label, newConfig);
+            this.hydra.emit(RECONFIGURE_EVENT, label, newConfig);
           });
         }
       }
