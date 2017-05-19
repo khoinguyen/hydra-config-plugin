@@ -1,7 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
-const HydraPlugin = require('hydra/plugin');
+const HydraPlugin = require('hydra-plugin');
 const RECONFIGURE_EVENT = 'reconfigure';
 exports.RECONFIGURE_EVENT = RECONFIGURE_EVENT;
 class Reconfigurable extends HydraPlugin {
