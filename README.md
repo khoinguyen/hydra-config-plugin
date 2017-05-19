@@ -1,5 +1,7 @@
 # reconfigurable-service
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c17fc9759ef843b7b22033f85cba2a33)](https://www.codacy.com/app/khoinguyen/hydra-reconfigurable-plugin?utm_source=github.com&utm_medium=referral&utm_content=khoinguyen/hydra-reconfigurable-plugin&utm_campaign=badger)
+
 Add reconfigurable support to hydra service
 
 ## Pre-installation
